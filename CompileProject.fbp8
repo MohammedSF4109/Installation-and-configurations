@@ -1,0 +1,161 @@
+﻿project
+begin
+  projectid = {B97898F5-53E7-484D-BF24-1F4B882AC4FA}
+  target
+  begin
+    name = Default
+    targetid = {14B3E2DF-EA58-4E18-83C8-7EECA233AA28}
+    rootaction
+    begin
+      action.setupbuilder.compile
+      begin
+        actiontypeid = {6DC858D1-BD02-4648-B59F-8F3480F8B43A}
+        customactionname = "SetupBuilder Compile Project"
+        enabled = false
+        enabletimeout = false
+        id = {2E16C612-1583-4043-ACFA-EFF8F5232E40}
+        impersonateusenetcredonly = false
+        impersonateuser = false
+        logtovariable = LogInfo
+        terminateontimeout = true
+        timeoutlength = 2
+        as.projectfile = %FBPROJECTDIR%\\GetSystemVariables.csproj
+        as.workingdirectory = "C:\\Users\\MohammedAbubakkarSid\\OneDrive - Syncfusion\\Desktop\\Installation and configuration\\FinalBuilder Projects\\CompileProject"
+        as.isrelease = False
+      end
+      action.borland.csharp.project
+      begin
+        architecture = ta32
+        configname = debug
+        enabled = false
+        enabletimeout = false
+        expandimpersonationtoken = false
+        id = {DA21E8CC-996E-4AD6-82B2-99ED74520A37}
+        impersonateusenetcredonly = false
+        impersonateuser = false
+        keepresponsefile = true
+        liblocations = %FBPROJECTDIR%\\GetSystemVariables.dll
+        logprocessparameters = true
+        logtovariable = LogInfo
+        overridesdkdefault = true
+        processoraffinity = 0
+        processpriority = tpNormal
+        projectfile = %FBPROJECTDIR%\\Program.cs
+        sdkversion = v4.0
+        terminateontimeout = false
+        timeoutlength = 2
+        useerrordialogmonitor = false
+      end
+      action.msbuild.execute
+      begin
+        architecture = ta32
+        buildfile = %FBPROJECTDIR%\\GetEnvionmentalVariables.csproj
+        disablenodereuse = true
+        enabled = false
+        enabletimeout = false
+        expandimpersonationtoken = false
+        id = {C768B510-8F7C-4455-AB74-C1C7C1FF52A9}
+        impersonateusenetcredonly = false
+        impersonateuser = false
+        loglevel = llNormal
+        logprocessparameters = false
+        logtovariable = LogInfo
+        maxcpucount = 0
+        msbuildversion = v14
+        nologo = true
+        outputtolog = false
+        overridesdkdefault = false
+        processoraffinity = 0
+        processpriority = tpNormal
+        sdkversion = v4.0
+        structuredlogging = true
+        terminateontimeout = false
+        timeoutlength = 2
+        useerrordialogmonitor = false
+      end
+      action.process.execute
+      begin
+        captureoutput = true
+        enablelivecapture = true
+        enablereturncodecheck = true
+        enabletimeout = false
+        expandimpersonationtoken = false
+        hidewindow = true
+        id = {34BCE3C1-5F0C-4837-9245-819EAA75FB35}
+        impersonateusenetcredonly = false
+        impersonateuser = false
+        logoutput = true
+        logprocessparameters = true
+        logtovariable = LogInfo
+        params = "dotnet run --project \"%FBPROJECTDIR%\\GetEnvironmentalVariables.csproj \""
+        processoraffinity = 0
+        processpriority = tpNormal
+        programname = cmd.exe
+        redirectstderr = true
+        returncodecomparator = rcEqualTo
+        returncodetocheck = 0
+        terminateontimeout = false
+        timeoutlength = 0
+        useerrordialogmonitor = false
+        waitforcompletion = true
+      end
+      action.if.prevfailed
+      begin
+        id = {AD532577-88E0-4096-BD21-EF43A40E4019}
+        action.textfile.write
+        begin
+          createifnotexists = false
+          encoding = ANSI
+          expandvariables = true
+          filename = %FBPROJECTDIR%\\BuildLog.txt
+          id = {BBA33E05-FCA4-435A-B4DE-D4548F5DD435}
+          ignorenocontent = true
+          newcontent = "%LogInfo%" +
+                       ""
+          writebom = true
+          writetoposition = toEnd
+        end
+      end
+      action.else
+      begin
+        id = {C22A81BE-1B6C-4834-8077-E6FE45F528DC}
+        action.process.execute
+        begin
+          captureoutput = true
+          enablelivecapture = true
+          enablereturncodecheck = true
+          enabletimeout = false
+          expandimpersonationtoken = false
+          hidewindow = true
+          id = {0096C74D-84DD-4FED-AA63-60BEF7D06F10}
+          impersonateusenetcredonly = false
+          impersonateuser = false
+          logoutput = true
+          logprocessparameters = true
+          logtovariable = Output
+          params = os
+          processoraffinity = 0
+          processpriority = tpNormal
+          programname = %FBPROJECTDIR%\\bin\\Debug\\net7.0\\GetEnvironmentalVariables.exe
+          redirectstderr = true
+          returncodecomparator = rcEqualTo
+          returncodetocheck = 0
+          terminateontimeout = false
+          timeoutlength = 0
+          useerrordialogmonitor = false
+          waitforcompletion = true
+        end
+      end
+    end
+  end
+  variable
+  begin
+    name = LogInfo
+    variablescope = vtProject
+  end
+  variable
+  begin
+    name = Output
+    variablescope = vtProject
+  end
+end
